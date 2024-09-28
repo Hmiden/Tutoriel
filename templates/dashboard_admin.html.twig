@@ -1,0 +1,114 @@
+{# templates/templates/dashboard_admin.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+        }
+        .dashboard-container h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        .dashboard-container .btn {
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 1.1rem;
+        }
+        .dashboard-container .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .dashboard-container .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .dashboard-container .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .dashboard-container .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        .dashboard-container .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .dashboard-container .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .table tbody tr {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+
+    <div class="container">
+        <div class="dashboard-container">
+            <h1>Gestion des Tutoriels</h1>
+
+            <!-- Form to add a new tutorial -->
+            <form action="{{ path('add_tutorial') }}" method="post" enctype="multipart/form-data" class="mb-5">
+                <div class="form-group">
+                    <label for="titre">Titre</label>
+                    <input type="text" class="form-control" id="titre" name="titre" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="format">Format</label>
+                    <input type="text" class="form-control" id="format" name="format" required>
+                </div>
+                <div class="form-group">
+                    <label for="categorie">Catégorie</label>
+                    <input type="number" class="form-control" id="categorie" name="categorie" required>
+                </div>
+                <div class="form-group">
+                    <label for="duree">Durée (minutes)</label>
+                    <input type="number" class="form-control" id="duree" name="duree" required>
+                </div>
+                <div class="form-group">
+                    <label for="langue">Langue</label>
+                    <input type="text" class="form-control" id="langue" name="langue" required>
+                </div>
+                <div class="form-group">
+                    <label for="file">Fichier (Image/Video/PDF)</label>
+                    <input type="file" class="form-control-file" id="file" name="file" required>
+                </div>
+                <button type="submit" class="btn btn-success">Ajouter Tutoriel</button>
+            </form>
+
+            <!-- Display flash messages -->
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+
+           
+{% endblock %}  

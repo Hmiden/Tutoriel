@@ -1,0 +1,75 @@
+<!-- templates/user/signup.html.twig -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100%;
+        }
+        .signup-container {
+            max-width: 400px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            color: white;
+        }
+        .signup-container h1 {
+            margin-bottom: 30px;
+        }
+        .signup-container input[type="text"],
+        .signup-container input[type="email"],
+        .signup-container input[type="password"],
+        .signup-container input[type="tel"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .signup-container button {
+            border-radius: 20px;
+            padding: 10px;
+        }
+        .signup-container a {
+            color: white;
+            text-decoration: underline;
+        }
+        .signup-container .btn-secondary {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="signup-container text-center mx-auto">
+          <h1>Inscription</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    {{ form_end(form) }}
+
+            <a href="{{ path('Connexionuser') }}" class="btn btn-secondary btn-block mt-2"> Vous avez deja un compte? </a>
+
+
+</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

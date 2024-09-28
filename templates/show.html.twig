@@ -1,0 +1,17 @@
+{# templates/   show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ tutoriel.titre }}{% endblock %}
+
+{% block body %}
+    <h1>{{ tutoriel.titre }}</h1>
+    <p><strong>Description:</strong> {{ tutoriel.description }}</p>
+    <p><strong>Format:</strong> {{ tutoriel.format }}</p>
+    <p><strong>Langue:</strong> {{ tutoriel.langue }}</p>
+    <p><strong>Durée:</strong> {{ tutoriel.duree }} minutes</p>
+    <p><strong>Vues:</strong> {{ tutoriel.views }}</p>
+    <!-- Add more fields as needed -->
+
+    <a href="{{ path('app_search') }}" class="btn btn-primary">Back to Search</a>
+{% endblock %}

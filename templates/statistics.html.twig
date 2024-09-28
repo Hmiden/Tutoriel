@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+            transform: translateX(0);
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+        #sidebar.collapsed {
+            transform: translateX(-250px);
+            width: 0;
+        }
+        #sidebar .nav-link {
+            color: #ffffff;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+        }
+        #sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+        #sidebar .nav-link.active {
+            background-color: #007bff;
+        }
+        #sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 200;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            transition: left 0.3s ease;
+        }
+        #sidebar-toggle.collapsed {
+            left: 270px; /* Adjust this value based on the collapsed sidebar width */
+        }
+        #main-content {
+            margin-left: 250px;
+            transition: margin-left 0.3s ease;
+        }
+        #main-content.shifted {
+            margin-left: 0;
+        }
+        .content-wrapper {
+            padding: 20px;
+            background-color: #f8f9fa;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        #chartContainer {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <div class="content-wrapper">
+        <h1>Statistiques des Utilisateurs</h1>
+
+        <p>Nombre total d'utilisateurs : {{ totalUsers }}</p>
+        <p>Nombre de comptes créés aujourd'hui : {{ usersRegisteredToday }}</p>
+
+        <div id="chartContainer">
+            <canvas id="registrationChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Script Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('registrationChart').getContext('2d');
+
+            // Données passées depuis Twig
+            const labels = {{ registrationLabels|json_encode|raw }};
+            const data = {{ registrationValues|json_encode|raw }};
+
+            // Création du graphique en lignes
+            const registrationChart = new Chart(ctx, {
+                type: 'line', // Type de graphique
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de Comptes Créés',
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Couleur de fond
+                        borderColor: 'rgba(54, 162, 235, 1)', // Couleur de bordure
+                        borderWidth: 1,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Jours de la Semaine'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Nombre de Comptes'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

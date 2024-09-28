@@ -1,0 +1,69 @@
+<!-- templates/user/login.html.twig -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100%;
+        }
+        .login-container {
+            max-width: 400px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+            color: white;
+        }
+        .login-container h1 {
+            margin-bottom: 30px;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .login-container button {
+            border-radius: 20px;
+            padding: 10px;
+        }
+        .login-container a {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container text-center mx-auto">
+        
+            <h1>Connexion</h1>
+            {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+                    {{ form_end(form) }}
+
+                <a href="{{ path('app_reset_password') }}" class="btn btn-link mt-2">Mot de passe oublié?</a>
+            </form>
+            <a href="{{ path('user_new') }}" class="btn btn-secondary btn-block mt-2">Vous n'avez pas de compte? Inscrivez-vous</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

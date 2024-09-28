@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche du Tutoriel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100%;
+            color: #fff;
+        }
+        .search-container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            margin: 100px auto;
+            text-align: center;
+        }
+        .search-container h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #f8f9fa;
+        }
+        .search-container .form-group label {
+            color: #f8f9fa;
+            font-weight: 600;
+        }
+        .search-container .form-control {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+        .search-container .form-control::placeholder {
+            color: #ccc;
+        }
+        .search-container .form-control option {
+            color: black;
+        }
+        .search-container .btn {
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            width: 100%;
+        }
+        .search-container .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .search-container .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .navbar-custom {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.9);
+            border: none;
+            border-radius: 10px;
+        }
+        .dropdown-item {
+            color: #fff;
+        }
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand text-white" href="#">
+        <i class="fas fa-search"></i> Recherche du Tutoriel
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> {{ user.nom }} ({{ user.userid }})
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a href="{{ path('user_edit_profile', {id: user.userid}) }}" class="dropdown-item">
+                        <i class="fas fa-user-edit"></i> Editer le Profil
+                    </a>
+                    <a href="{{ path('user_historique_profile', {id: user.userid}) }}" class="dropdown-item">
+                        <i class="fas fa-history"></i> Historique
+                    </a>
+                     <a href="{{ path('favoris') }}" class="dropdown-item">
+                        <i class="fas fa-star"></i> Favoris
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="{{ path('Connexionuser') }}">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="search-container mx-auto">
+            <h1>Recherche du Tutoriel</h1>
+            <form method="GET" action="{{ path('app_search_results') }}">
+                <div class="form-group">
+                    <label for="titre">Titre</label>
+                    <input type="text" id="titre" name="titre" class="form-control" placeholder="Rechercher par titre">
+                </div>
+                <div class="form-group">
+                    <label for="format">Format</label>
+                    <select id="format" name="format" class="form-control">
+                        <option value="">--Sélectionnez le format--</option>
+                        <option value=".jpg">Image</option>
+                        <option value=".pdf">PDF</option>
+                        <option value=".mp4">Vidéo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="duree">Durée</label>
+                    <select id="duree" name="duree" class="form-control">
+                        <option value="">--Sélectionnez la durée--</option>
+                        <option value="30">Moins de 30 minutes</option>
+                        <option value="61">Plus de 30 minutes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="langue">Langue</label>
+                    <select id="langue" name="langue" class="form-control">
+                        <option value="">--Sélectionnez la langue--</option>
+                        <option value="fr">Français</option>
+                        <option value="ar">Arabe</option>
+                        <option value="ang">Anglais</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

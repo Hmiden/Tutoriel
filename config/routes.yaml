@@ -1,0 +1,30 @@
+dashboard_admin:
+    path: /dashboard
+    controller: App\Controller\UserController::addTutorial
+
+edit_tutoriel:
+    path: /tutoriel/edit/{id}
+    controller: App\Controller\UserController::editTutorial
+    methods: [GET, POST]
+
+delete_tutoriel:
+    path: /tutoriel/delete/{id}
+    controller: App\Controller\UserController::deleteTutorial
+    methods: [POST]
+# config/routes.yaml
+increment_views:
+    path: /increment_views/tutoriel/{format}/{titre}
+    controller: App\Controller\SearchController::incrementViews
+    methods: [POST]
+# Ajout des routes pour la recherche
+# config/routes.yaml
+
+search_ajax:
+    path: /search
+    controller: App\Controller\SearchController::searchForm
+    methods: [GET]
+
+search_results:
+    path: /search-results
+    controller: App\Controller\SearchController::searchResults
+    methods: [GET]

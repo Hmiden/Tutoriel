@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+            transform: translateX(0);
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+        #sidebar.collapsed {
+            transform: translateX(-250px);
+            width: 0;
+        }
+        #sidebar .nav-link {
+            color: #ffffff;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+        }
+        #sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+        #sidebar .nav-link.active {
+            background-color: #007bff;
+        }
+        #sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 200;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            transition: left 0.3s ease;
+        }
+        #sidebar-toggle.collapsed {
+            left: 270px; /* Adjust this value based on the collapsed sidebar width */
+        }
+        #main-content {
+            margin-left: 250px;
+            transition: margin-left 0.3s ease;
+        }
+        #main-content.shifted {
+            margin-left: 0;
+        }
+        .position-sticky {
+            top: 60px; /* Adjust this value to push the sticky content down */
+        }
+    </style>
+    <h1>Tutoriels les plus consultés</h1>
+
+    <!-- List of Most Viewed Tutorials -->
+    <ul>
+        {% for tutorial in tutorials %}
+            <li>{{ tutorial.titre }} - Nombre de vues: {{ tutorial.views }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Chart Container -->
+    <div style="width: 80%; margin: auto;">
+        <canvas id="viewsChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('viewsChart').getContext('2d');
+
+            // Data passed from Twig
+            const labels = {{ tutorials|map(t => t.titre)|json_encode|raw }};
+            const data = {{ tutorials|map(t => t.views)|json_encode|raw }};
+
+            // Create the bar chart
+            const viewsChart = new Chart(ctx, {
+                type: 'bar', // Chart type
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Views',
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)', // Background color
+                        borderColor: 'rgba(54, 162, 235, 1)', // Border color
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+        }
+        .dashboard-container h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        .dashboard-container .btn {
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 1.1rem;
+        }
+        .dashboard-container .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .dashboard-container .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .dashboard-container .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .dashboard-container .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+        .dashboard-container .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .dashboard-container .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+        .alert {
+            margin-bottom: 20px;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .table tbody tr {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+
+   
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Format</th>
+                        <th>Catégorie</th>
+                        <th>Durée</th>
+                        <th>Langue</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tutoriel in tutoriels %}
+                        <tr>
+                            <td>{{ tutoriel.id }}</td>
+                            <td>{{ tutoriel.titre }}</td>
+                            <td>{{ tutoriel.description }}</td>
+                            <td>{{ tutoriel.format }}</td>
+                            <td>{{ tutoriel.categorie }}</td>
+                            <td>{{ tutoriel.duree }}</td>
+                            <td>{{ tutoriel.langue }}</td>
+                            <td>
+                                <a href="{{ path('edit_tutoriel', {id: tutoriel.id}) }}" class="btn btn-warning btn-sm">Éditer</a>
+                                <form method="post" action="{{ path('delete_tutoriel', {id: tutoriel.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce tutoriel ?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center">Aucun tutoriel trouvé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

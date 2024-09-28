@@ -1,0 +1,132 @@
+{# templates/favoris.html.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Favoris</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100%;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .favoris-container {
+            max-width: 900px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            margin: 100px auto;
+        }
+        .favoris-container h1 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .card-body {
+            background: #fff;
+            color: #333;
+        }
+        .btn-custom {
+            font-size: 0.9rem;
+            padding: 10px 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-custom bg-dark text-white">
+    <a class="navbar-brand text-white" href="{{path('app_search')}}">
+        <i class="fas fa-search"></i> Recherche du Tutoriel
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i> {{ user.nom }} ({{ user.userid }})
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a href="{{ path('user_edit_profile', {id: user.userid}) }}" class="dropdown-item">
+                        <i class="fas fa-user-edit"></i> Editer le Profil
+                    </a>
+                    <a href="{{ path('user_historique_profile', {id: user.userid}) }}" class="dropdown-item">
+                        <i class="fas fa-history"></i> Historique
+                    </a>
+                      <a href="{{ path('favoris') }}" class="dropdown-item">
+                        <i class="fas fa-favoris"></i> Favoris
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="{{ path('Connexionuser') }}">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="favoris-container mx-auto">
+            <h1>Mes Favoris</h1>
+            {% if favoriteTutorials is empty %}
+                <p class="text-center">Vous n'avez pas encore de tutoriels favoris.</p>
+            {% else %}
+                <div class="row">
+                    {% for tutorial in favoriteTutorials %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                {% if tutorial.format == '.pdf' %}
+                                    <a href="{{ path('view_tutoriel', { id: tutorial.id, format: 'pdf', titre: tutorial.titre ~ tutorial.format }) }}" class="btn btn-primary btn-custom">Voir le PDF</a>
+                                {% elseif tutorial.format == '.jpg' %}
+                                    <a href="{{ path('view_tutoriel', { id: tutorial.id, format: 'image', titre: tutorial.titre ~ tutorial.format }) }}" class="btn btn-primary btn-custom">Voir l'image</a>
+                                {% elseif tutorial.format == '.mp4' %}
+                                    <a href="{{ path('view_tutoriel', { id: tutorial.id, format: 'video', titre: tutorial.titre ~ tutorial.format }) }}" class="btn btn-secondary btn-custom">Voir la vidéo</a>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ tutorial.titre }}</h5>
+                                    <p class="card-text">{{ tutorial.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

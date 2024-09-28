@@ -1,0 +1,35 @@
+{
+  "name": "tutoriel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.3",
+    "sass": "^1.77.8",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
+    "@hotwired/stimulus": "^3.0.0",
+    "@hotwired/turbo": "^7.1.1 || ^8.0",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
+    "@symfony/webpack-encore": "^4.6.1",
+    "webpack-notifier": "^1.13.0"
+  },
+  "scripts": {
+    "dev": "encore dev",
+    "dev-server": "encore dev-server",
+    "build": "encore production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

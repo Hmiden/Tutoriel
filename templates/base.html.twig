@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+{# templates/login/index.html.twig #}
+
+{# ... #}
+<form action="{{ path('Connexionuser') }}" method="post">
+    {# ... the login fields #}
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <button type="submit">login</button>
+</form>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('path/to/your/css/styles.css') }}">
+    <!-- Add Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+            transform: translateX(0);
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+        #sidebar.collapsed {
+            transform: translateX(-250px);
+            width: 0;
+        }
+        #sidebar .nav-link {
+            color: #ffffff;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+        }
+        #sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+        #sidebar .nav-link.active {
+            background-color: #007bff;
+        }
+        #sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 200;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            transition: left 0.3s ease;
+        }
+        #sidebar-toggle.collapsed {
+            left: 270px; /* Adjust this value based on the collapsed sidebar width */
+        }
+        #main-content {
+            margin-left: 250px;
+            transition: margin-left 0.3s ease;
+        }
+        #main-content.shifted {
+            margin-left: 0;
+        }
+        .position-sticky {
+            top: 60px; /* Adjust this value to push the sticky content down */
+        }
+    </style>
+</head>
+<body>
+    <button id="sidebar-toggle" class="btn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav id="sidebar" class="d-flex flex-column">
+        <div class="position-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('dashboard_admin') }}">
+                        <i class="fas fa-home"></i> Accueil
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('gestion_utilisateur') }}">
+                        <i class="fas fa-users"></i> Gestion Utilisateur
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('gestion_tutoriel') }}">
+                        <i class="fas fa-book"></i> Gestion Tutoriel
+                    </a>
+               <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="statsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-chart-bar"></i> Statistiques
+    </a>
+    <div class="dropdown-menu" aria-labelledby="statsDropdown">
+        <a class="dropdown-item" href="{{ path('most_viewed_tutorials') }}">
+            <i class="fas fa-book"></i> Tutoriels les plus vus
+        </a>
+        <a class="dropdown-item" href="{{ path('statistics') }}">
+            <i class="fas fa-users"></i> Statistiques des utilisateurs
+        </a>
+    </div>
+</li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('Connexionuser') }}">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </li>
+                <!-- Add more items as needed -->
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main-content" role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4">
+        {% block body %}{% endblock %}
+    </main>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sidebar = document.getElementById('sidebar');
+            var toggleButton = document.getElementById('sidebar-toggle');
+            var mainContent = document.getElementById('main-content');
+
+            toggleButton.addEventListener('click', function () {
+                sidebar.classList.toggle('collapsed');
+                toggleButton.classList.toggle('collapsed');
+                mainContent.classList.toggle('shifted');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter Utilisateur</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://e1.pxfuel.com/desktop-wallpaper/581/154/desktop-wallpaper-backgrounds-for-login-page-login-page.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .form-container {
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+        .form-container h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .form-container .form-group {
+            margin-bottom: 15px;
+        }
+        .form-container .btn-primary {
+            border-radius: 20px;
+            padding: 8px 15px;
+        }
+        .form-container .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .form-container a {
+            color: #f8f9fa;
+            text-decoration: none;
+        }
+        .form-container a:hover {
+            color: #adb5bd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Ajouter Utilisateur</h1>
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.nom) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.prenom) }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.prenom) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.password) }}
+                    {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.password) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.role) }}
+                    {{ form_widget(form.role, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.role) }}
+                </div>
+                <button class="btn btn-primary">Ajouter Utilisateur</button>
+            {{ form_end(form) }}
+            <a href="{{ path('gestion_utilisateur') }}" class="btn btn-secondary mt-3">Retour</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
